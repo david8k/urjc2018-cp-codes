@@ -22,7 +22,7 @@ struct state{
     node = a; dist = b; 
   }
   bool operator<(const state &other)const{ // sobrecarga de operadores para ordenar
-    return other.dist < other.dist;
+    return other.dist < dist;
   }
 };
 

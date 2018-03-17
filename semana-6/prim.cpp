@@ -28,6 +28,7 @@ struct state{
 
 vector<edge> graph[MAXN];
 bool visited[MAXN];
+int dist[MAXN];
 
 int a=1;
 int N,E;
@@ -35,9 +36,11 @@ int N,E;
 int prim(int start){
   priority_queue<state> pq;
   pq.push(state(start, 0));
+  dist[start] = 0;
   int sum = 0;
   while(!pq.empty()){
     state cur = pq.top(); pq.pop();
+    if(dist[cur.node] < cur.dist) continue;
     if(visited[cur.node]) continue;
     sum += cur.dist;
     visited[cur.node] = true;
@@ -46,6 +49,7 @@ int prim(int start){
       int wht = graph[cur.node][i].weight;
       if(visited[dest]) continue;
       pq.push(state(dest, wht));
+      dist[dest] = wht;
     }
   }
   return sum;
